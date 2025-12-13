@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pedir Taxi | Mi Taxi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 480px;
+      margin: auto;
+      background: #ffffff;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    h1 {
+      text-align: center;
+      color: #222;
+    }
+    p {
+      text-align: center;
+      color: #555;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    textarea {
+      resize: none;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+      background: #25D366;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1ebe5d;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚕 Mi Taxi</h1>
+    <p>Pedí tu taxi rápido y sin llamadas<br>Mercedes, Buenos Aires</p>
+
+    <label for="origen">📍 Dirección de salida</label>
+    <input type="text" id="origen" placeholder="Ej: Calle 123" required />
+
+    <label for="destino">🏁 Destino</label>
+    <input type="text" id="destino" placeholder="Ej: Hospital" required />
+
+    <label for="nombre">👤 Nombre</label>
+    <input type="text" id="nombre" placeholder="Tu nombre" />
+
+    <label for="obs">📝 Observaciones</label>
+    <textarea id="obs" rows="3" placeholder="Ej: Casa con portón negro"></textarea>
+
+    <button onclick="pedirTaxi()">PEDIR TAXI</button>
+
+    <div class="footer">
+      También podés llamar si lo preferís
+    </div>
+  </div>
+
+  <script>
+    function pedirTaxi() {
+      const origen = document.getElementById('origen').value;
+      const destino = document.getElementById('destino').value;
+      const nombre = document.getElementById('nombre').value;
+      const obs = document.getElementById('obs').value;
+
+      if (!origen || !destino) {
+        alert('Por favor completá origen y destino');
+        return;
+      }
+
+      let mensaje = `Hola, quiero un taxi 🚕%0A` +
+        `📍 Salida: ${origen}%0A` +
+        `🏁 Destino: ${destino}%0A`;
+
+      if (nombre) mensaje += `👤 Nombre: ${nombre}%0A`;
+      if (obs) mensaje += `📝 Observaciones: ${obs}%0A`;
+
+      const telefono = '5492324564733';
+      const url = `https://wa.me/${telefono}?text=${mensaje}`;
+
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>
