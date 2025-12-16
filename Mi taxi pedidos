@@ -1,1 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pedir Taxi | Parada Oficial</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #f7f7f7, #eaeaea);
+    }
+
+    .app {
+      max-width: 420px;
+      margin: auto;
+      min-height: 100vh;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 10px 0 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+      color: #222;
+    }
+
+    header p {
+      margin-top: 5px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .card {
+      background: #f9f9f9;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 15px;
+      display: block;
+      color: #333;
+    }
+
+    input, textarea {
+      width: 100%;
+      margin-top: 6px;
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #25D366;
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    .btn {
+      margin-top: 25px;
+      width: 100%;
+      padding: 16px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 14px;
+      background: #25D366;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.1s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #1ebe5d;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #777;
+      margin-top: auto;
+      padding: 15px 0 5px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #eee;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <header>
+      <h1>🚕 Parada de Taxis</h1>
+      <p>Mercedes, Buenos Aires</p>
+      <div class="badge">Servicio 24 hs</div>
+    </header>
+
+    <div class="card">
+      <label>📍 Dirección de salida</label>
+      <input type="text" id="origen" placeholder="Ej: Calle 123" required>
+
+      <label>🏁 Destino</label>
+      <input type="text" id="destino" placeholder="Ej: Hospital" required>
+
+      <label>👤 Nombre</label>
+      <input type="text" id="nombre" placeholder="Opcional">
+
+      <label>📝 Observaciones</label>
+      <textarea id="obs" rows="3" placeholder="Ej: Portón negro, timbre roto"></textarea>
+
+      <button class="btn" onclick="pedirTaxi()">PEDIR TAXI</button>
+    </div>
+
+    <footer>
+      También podés llamar a la parada si lo preferís
+    </footer>
+
+  </div>
+
+  <script>
+    function pedirTaxi() {
+      const origen = document.getElementById('origen').value;
+      const destino = document.getElementById('destino').value;
+      const nombre = document.getElementById('nombre').value;
+      const obs = document.getElementById('obs').value;
+
+      if (!origen || !destino) {
+        alert('Por favor completá origen y destino');
+        return;
+      }
+
+      let mensaje = `Hola, quiero un taxi 🚕%0A` +
+        `📍 Salida: ${origen}%0A` +
+        `🏁 Destino: ${destino}%0A`;
+
+      if (nombre) mensaje += `👤 Nombre: ${nombre}%0A`;
+      if (obs) mensaje += `📝 Observaciones: ${obs}%0A`;
+
+      const telefono = '5492324564733';
+      const url = `https://wa.me/${telefono}?text=${mensaje}`;
+
+      window.open(url, '_blank');
+    }
+  </script>
+
+</body>
+</html>
